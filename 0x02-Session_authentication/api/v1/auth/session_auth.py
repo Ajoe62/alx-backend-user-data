@@ -7,6 +7,7 @@ from models.user import User
 from uuid import uuid4
 from flask import request
 
+
 class SessionAuth(Auth):
     """Session authentication class.
     """
