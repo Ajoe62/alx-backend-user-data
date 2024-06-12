@@ -12,9 +12,8 @@ from user import Base, User
 
 
 class DB:
-    """DB Class 
+    """DB Class
     """
-
     def __init__(self) -> None:
         """Initialize a new DB instance
         """
