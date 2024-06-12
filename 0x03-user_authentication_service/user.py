@@ -1,40 +1,26 @@
 #!/usr/bin/env python3
-"""Main application file."""
+"""Defines the User model for the application."""
 
-from typing import List
-from flask import Flask, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 
-app = Flask(__name__)
-
-# Database Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
 Base = declarative_base()
 
-class User(db.Model):
-    """User model."""
+class User(Base):
+    """Represents a user in the system.
+
+    Attributes:
+        id (int): Unique identifier for the user.
+        email (str): Email address of the user, unique per account.
+        hashed_password (str): Hashed password for authentication.
+        session_id (str): Optional session identifier.
+        reset_token (str): Optional token for password reset.
+    """
     __tablename__ = 'users'
-    
+
     id = Column(Integer, primary_key=True)
-    email = Column(String, nullable=False)
-    hashed_password = Column(String, nullable=False)
-    session_id = Column(String, nullable=True)
-    reset_token = Column(String, nullable=True)
-
-    def __repr__(self):
-        return f"<User {self.email}>"
-
-@app.route('/')
-def home():
-    """Return a list of users."""
-    users = [user.email for user in User.query.all()]
-    return jsonify(users)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    email = Column(String(250), nullable=False)
+    hashed_password = Column(String(250), nullable=False)
+    session_id = Column(String(250), nullable=True)
+    reset_token = Column(String(250), nullable=True)
 
