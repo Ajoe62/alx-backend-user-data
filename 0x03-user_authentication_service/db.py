@@ -38,4 +38,3 @@ class DB:
         except IntegrityError:
             self._session.rollback()
             raise ValueError("Email already exists.")
-
