@@ -42,10 +42,7 @@ class DB:
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
-        """_summary_
-
-        Returns:
-            User: _description_
+        """Find a user in the database and return the User object
         """
         if not kwargs:
             raise InvalidRequestError
@@ -56,10 +53,7 @@ class DB:
         return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
-        """_summary_
-
-        Args:
-            user_id (int): _description_
+        """update user in the database
         """
         user = self.find_user_by(id=user_id)
         for key, value in kwargs.items():
